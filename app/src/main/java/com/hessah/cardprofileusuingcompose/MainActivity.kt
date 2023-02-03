@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
@@ -21,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.res.painterResource
@@ -48,8 +50,8 @@ import com.hessah.cardprofileusuingcompose.ui.theme.CardProfileUsuingComposeThem
 @Composable
 fun CreatBizCardFunction(){
 
-    val VVClickButtonState = remember {
-        mutableStateOf(false)
+    val VV_ClickButtonState = remember {
+        mutableStateOf(true)
     }
 
         Surface (modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
@@ -64,7 +66,6 @@ fun CreatBizCardFunction(){
                 elevation = 4.dp
 
             ) {
-
                 Column(modifier = Modifier.height(300.dp),
 
                 verticalArrangement = Arrangement.Top,
@@ -83,7 +84,7 @@ fun CreatBizCardFunction(){
 
                             // for make the list visible and invisible
                             // wine the user click on the Button  **
-                            VVClickButtonState.value= !VVClickButtonState.value
+                            VV_ClickButtonState.value= !VV_ClickButtonState.value
 
                             Log.d("Clicked","Clicked")
                         }
@@ -91,7 +92,7 @@ fun CreatBizCardFunction(){
                       Text(text = "Portfolio",
                       style = MaterialTheme.typography.button)
                     }
-                    if (VVClickButtonState.value) {
+                    if (VV_ClickButtonState.value) {
                         FFContent()
 
                     }else {
@@ -125,8 +126,20 @@ fun FFPorfolio_list(variable_data: List<String>) {
     //lazycolmun for make the list as scroll list
     //like Recyclerview **
     LazyColumn {
-        items(variable_data){
-            item ->
+        items(variable_data){ item ->
+         Card (modifier = Modifier .padding(13.dp)
+             .fillMaxHeight(),
+         shape = RectangleShape)   {
+
+             Row  (modifier = Modifier.padding(8.dp).
+             background(MaterialTheme.colors.surface)
+                 .padding(16.dp)){
+                 CreateImegeProfile()
+             }
+
+         }
+
+
 
         }
     }
@@ -153,9 +166,9 @@ fun FFPorfolio_list(variable_data: List<String>) {
 }
 
 @Composable
- fun CreateImegeProfile() {
+ fun CreateImegeProfile(modofier_variable_For_Optional: Modifier=Modifier) {
     Surface(
-        modifier = Modifier
+        modifier = modofier_variable_For_Optional
             .size(150.dp)
             .padding(5.dp), shape = CircleShape,
         border = BorderStroke(0.5.dp, Color.LightGray),
@@ -167,7 +180,7 @@ fun FFPorfolio_list(variable_data: List<String>) {
         Image(
             painter = painterResource(R.drawable.horsesphoto),
             contentDescription = "profile photo",
-            modifier = Modifier.size(130.dp),
+            modifier = modofier_variable_For_Optional.size(130.dp),
 
             //make photo fill max padding
             contentScale = ContentScale.Crop
