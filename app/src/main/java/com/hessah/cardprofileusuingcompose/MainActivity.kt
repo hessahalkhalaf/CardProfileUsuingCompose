@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDirection.Companion.Content
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -84,7 +85,7 @@ fun CreatBizCardFunction(){
 
                             // for make the list visible and invisible
                             // wine the user click on the Button  **
-                            VV_ClickButtonState.value= !VV_ClickButtonState.value
+                            VV_ClickButtonState.value = !VV_ClickButtonState.value
 
                             Log.d("Clicked","Clicked")
                         }
@@ -131,12 +132,17 @@ fun FFPorfolio_list(variable_data: List<String>) {
              .fillMaxHeight(),
          shape = RectangleShape)   {
 
-             Row  (modifier = Modifier.padding(8.dp).
-             background(MaterialTheme.colors.surface)
+             Row  (modifier = Modifier
+                 .padding(9.dp).
+                  background(MaterialTheme.colors.surface)
                  .padding(16.dp)){
-                 CreateImegeProfile()
+                 CreateImegeProfile(modofier_variable_For_Optional = Modifier.size(100.dp))
+                 Column(modifier = Modifier.padding(7.dp).align(alignment = Alignment.CenterVertically)){
+                      Text(text= item, fontWeight = FontWeight.Bold)
+                     Text(text= "hi this my little project compose",
+                     style = MaterialTheme.typography.body2)
+                 }
              }
-
          }
 
 
@@ -178,7 +184,7 @@ fun FFPorfolio_list(variable_data: List<String>) {
 
         //what image you want see (id & Description )for photo
         Image(
-            painter = painterResource(R.drawable.horsesphoto),
+            painter = painterResource(R.drawable.horsesbleack),
             contentDescription = "profile photo",
             modifier = modofier_variable_For_Optional.size(130.dp),
 
